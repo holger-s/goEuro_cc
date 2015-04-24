@@ -1,84 +1,24 @@
-Java Developer Test
-===================
+# Hexagonal Architecture / Ports and Adapter Kata
 
-The purpose of this test is to see how you approach a problem and what your solutions look like. The requirements for this test are simple and
-should be straightforward to grasp. That said:
-Implement an API query and transform this data into a csv file
-Create a Java command line tool that takes as an input parameter a string
+This is a kata on ports and adapters architecture. The task is to retrieve a list of weather observartions from weather
+stations on iceland using the following API:
 
-java -jar GoEuroTest.jar "CITY_NAME"
+http://apis.is/weather/observations/en?stations=1,422
 
-The program takes this string and queries with it our Location JSON API:
-The app should use this API endpoint:
+and convert output the result into a CSV file of the following format:
 
-http://api.goeuro.com/api/v2/position/suggest/en/CITY_NAME
+station_id, station_name, time_of_last_observation, wind_direction
 
-Where CITY_NAME is the string that the user has entered as a parameter when calling the tool, e.g.
+Documentation on the API can be found here: http://docs.apis.is/#endpoint-weather. There is no rate-limiting.
 
-http://api.goeuro.com/api/v2/position/suggest/en/Berlin
+The goal is not to get this done as quickly as possible, but to follow the rules of
+(http://alistair.cockburn.us/Hexagonal+architecture)[ports and adapters architecture]:
+  * The application itself does not depend directly on any external systems, but only on ports
+  * The protocol for a port is given by the purpose of the conversation it describes
+  * For each external system there is an ‘’adapter’’ that converts the API definition to the format needed by that system
+    and vice versa
 
-The API endpoint returns JSON documents like these:
+Now have some fun!
 
-```javascript
-[
 
- {
 
- _id: 377078,
- key: null,
- name: "Potsdam",
- fullName: "Potsdam, Germany",
- iata_airport_code: null,
- type: "location",
- country: "Germany",
-
- geo_position: {
- latitude: 52.39886,
- longitude: 13.06566
- },
- location_id: 377078,
- inEurope: true,
- countryCode: "DE",
- coreCountry: true,
- distance: null
- },
-
- {
- _id: 410978,
- key: null,
- name: "Potsdam",
- fullName: "Potsdam, USA",
- iata_airport_code: null,
- type: "location",
- country: "USA",
-
- geo_position: {
- latitude: 44.66978,
- longitude: -74.98131
- },
-
- location_id: 410978,
- inEurope: false,
- countryCode: "US",
- coreCountry: false,
- distance: null
- }
- ]
-```
-
-The endpoint always responds with a JSON array that contains JSON objects as elements. Each object, among other keys, has a name and a geo_position key.
-The geo_position key is an object with latitude and longitude fields.
-If no matches are found an empty JSON array is returned.
-
-The program should query the API with the user input and create a CSV file from it. The CSV file should have the form: _id, name, type, latitude,
-longitude
-
-Your solution
-=============
-
-Please implement your solution as a stand alone application which can be started from the command line, i.e. send us a fat jar file with all
-dependencies. You can use Java 7 and open source libraries that you think help you to fulfill this task.
-Also send us the source code to your solution. We use GitHub, so if you put your source code into a GitHub repository, it will make our life easier.
-We will evaluate your source code as well as the functionality of the program: Does it run, how does it handle errors, etc.
-
-Thank you!
