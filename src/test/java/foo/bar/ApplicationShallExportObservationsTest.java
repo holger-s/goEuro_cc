@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class ApplicationShallExportObservationsTest {
     private ObservationSource observationSource = Mockito.mock(ObservationSource.class);
     private ObservationSink observationSink = Mockito.mock(ObservationSink.class);
-    private List<Observation> locationsFound = new LinkedList<>();
+    private List<Observation> observationsFound = new LinkedList<>();
     private Application sut;
 
     //TODO maybe can use ParametrizedTests of Junit
@@ -28,17 +28,19 @@ public class ApplicationShallExportObservationsTest {
     @Before
     public void setUp() throws Exception {
         sut = new Application(observationSource, observationSink);
-        when(observationSource.getWeatherFor(anyString())).thenReturn(locationsFound);
+        when(observationSource.getWeatherFor(anyString())).thenReturn(observationsFound);
     }
 
     @Test
-    public void shouldExportCVSRowForBerlinLocation() throws Exception {
-        locationsFound.add(new Observation(1, "name", "time", null));
+    public void shouldExportCSVRowForStation1() throws Exception {
+        observationsFound.add(new Observation(1, "name", "time", null));
 
         sut.exportFor("1");
 
         verify(observationSink).storeObservations(eq("1"), containsInAnyOrder("1,name,time"));
     }
+
+    //add more tests for more than one station
 
 
     private Collection<String> containsInAnyOrder(String... cvsRows) {

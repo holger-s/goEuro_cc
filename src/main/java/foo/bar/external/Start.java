@@ -5,9 +5,9 @@ import foo.bar.Application;
 public class Start {
     public static void main(String[] args) {
         if (args.length == 0) {
-            System.err.println("Please provide location as command line argument");
+            System.err.println("Please provide station id as command line argument");
 
-        }else{
+        } else {
             exportFor(args[0]);
         }
     }

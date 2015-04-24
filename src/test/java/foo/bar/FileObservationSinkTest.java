@@ -14,8 +14,8 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FileObservationSinkTest {
-    public static final String SAMPLE_LOCATION = "location1";
-    public static final String OUTPUT_FILE_NAME = SAMPLE_LOCATION + ".csv";
+    public static final String SAMPLE_OBSERVATION = "observation11";
+    public static final String OUTPUT_FILE_NAME = SAMPLE_OBSERVATION + ".csv";
     private FileWeatherSink sut = new FileWeatherSink();
 
     @Before
@@ -30,7 +30,7 @@ public class FileObservationSinkTest {
     public void shallSaveDataToAFile() throws IOException {
         String[] fileContent = {"a1,a2", "b1,b2", "c1,c2"};
 
-        sut.storeObservations(SAMPLE_LOCATION, Arrays.asList(fileContent));
+        sut.storeObservations(SAMPLE_OBSERVATION, Arrays.asList(fileContent));
 
         assertThat(readFileContent(OUTPUT_FILE_NAME), Matchers.contains(fileContent));
     }

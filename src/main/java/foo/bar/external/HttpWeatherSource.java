@@ -24,9 +24,9 @@ public class HttpWeatherSource implements ObservationSource {
     }
 
     @Override
-    public Collection<Observation> getWeatherFor(String... locations) {
+    public Collection<Observation> getWeatherFor(String... stationIds) {
         try {
-            String fullURL = String.format(urlFormat, Arrays.stream(locations).collect(Collectors.joining(",")));
+            String fullURL = String.format(urlFormat, Arrays.stream(stationIds).collect(Collectors.joining(",")));
             URL url = new URL(fullURL);
             try (InputStream inputStream = url.openStream();
                  InputStreamReader inputStreamReader = new InputStreamReader(inputStream,

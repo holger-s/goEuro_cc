@@ -24,7 +24,7 @@ public class HttpObservationSourceTest {
     }
 
     @Test
-    public void shallReturnEmptyJsonForNonExistingLocation() throws Exception {
+    public void shallReturnEmptyJsonForNonExistingStation() throws Exception {
         Collection<Observation> nonExistingObservations = sut.getWeatherFor("_SADADSA");
 
         assertThat(nonExistingObservations, emptyCollectionOf(Observation.class));

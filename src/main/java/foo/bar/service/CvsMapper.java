@@ -7,6 +7,6 @@ public class CvsMapper {
 
     public String map(Observation observation) {
         return observation.getId() + SEPARATOR + observation.getName() + SEPARATOR + observation.getTime();
-
+//TODO: Add escaping logic if name contains double quotes or commas
     }
 }
