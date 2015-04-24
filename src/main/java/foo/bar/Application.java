@@ -1,32 +1,32 @@
 package foo.bar;
 
 
-import foo.bar.foo.bar.domain.Location;
+import foo.bar.foo.bar.domain.Observation;
 import foo.bar.service.CvsMapper;
-import foo.bar.service.LocationSink;
-import foo.bar.service.LocationSource;
+import foo.bar.service.ObservationSink;
+import foo.bar.service.ObservationSource;
 
 import java.util.Collection;
 import java.util.LinkedList;
 
 public class Application {
-    private final LocationSource locationSource;
-    private final LocationSink locationSink;
+    private final ObservationSource observationSource;
+    private final ObservationSink observationSink;
     private final CvsMapper cvsMapper;
 
-    public Application(LocationSource locationSource, LocationSink locationSink) {
-        this.locationSource = locationSource;
-        this.locationSink = locationSink;
+    public Application(ObservationSource observationSource, ObservationSink observationSink) {
+        this.observationSource = observationSource;
+        this.observationSink = observationSink;
         this.cvsMapper = new CvsMapper();
     }
 
-    public void exportFor(String locationName) {
+    public void exportFor(String stationId) {
         Collection<String> result = new LinkedList<>();
-        Collection<Location> locations = locationSource.getLocationsFor(locationName);
-        for (Location location : locations) {
-            String csvRow = cvsMapper.map(location);
+        Collection<Observation> observations = observationSource.getWeatherFor(stationId);
+        for (Observation observation : observations) {
+            String csvRow = cvsMapper.map(observation);
             result.add(csvRow);
         }
-        locationSink.storeLocations(locationName, result);
+        observationSink.storeObservations(stationId, result);
     }
 }

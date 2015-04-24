@@ -1,7 +1,7 @@
 package foo.bar;
 
 
-import foo.bar.external.FileLocationSink;
+import foo.bar.external.FileWeatherSink;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,10 +13,10 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class FileLocationSinkTest {
+public class FileObservationSinkTest {
     public static final String SAMPLE_LOCATION = "location1";
     public static final String OUTPUT_FILE_NAME = SAMPLE_LOCATION + ".csv";
-    private FileLocationSink sut = new FileLocationSink();
+    private FileWeatherSink sut = new FileWeatherSink();
 
     @Before
     public void removeSampleFileName() throws Exception {
@@ -30,7 +30,7 @@ public class FileLocationSinkTest {
     public void shallSaveDataToAFile() throws IOException {
         String[] fileContent = {"a1,a2", "b1,b2", "c1,c2"};
 
-        sut.storeLocations(SAMPLE_LOCATION, Arrays.asList(fileContent));
+        sut.storeObservations(SAMPLE_LOCATION, Arrays.asList(fileContent));
 
         assertThat(readFileContent(OUTPUT_FILE_NAME), Matchers.contains(fileContent));
     }

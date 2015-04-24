@@ -1,16 +1,16 @@
 package foo.bar.external;
 
 
-import foo.bar.service.LocationSink;
+import foo.bar.service.ObservationSink;
 
 import java.io.*;
 import java.util.Collection;
 //TODO Maybe add folder as constructor parameter
-public class FileLocationSink implements LocationSink{
+public class FileWeatherSink implements ObservationSink {
     public final String CVS_EXTENSION = ".csv";
     @Override
-    public void storeLocations(String locationName, Collection<String> exportOutput) {
-        String fileName = locationName + CVS_EXTENSION;
+    public void storeObservations(String observationName, Collection<String> exportOutput) {
+        String fileName = observationName + CVS_EXTENSION;
         try {
             try(BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream(fileName), "UTF-8"));){

@@ -10,16 +10,13 @@ public class Start {
         }else{
             exportFor(args[0]);
         }
-
-
     }
 
-    private static void exportFor(String location) {
-        HttpLocationSource httpLocationSource = new HttpLocationSource("http://api.goeuro" +
-                ".com/api/v2/position/suggest/en/");
-        FileLocationSink fileLocationSink = new FileLocationSink();
-        Application application = new Application(httpLocationSource, fileLocationSink);
-        application.exportFor(location);
+    private static void exportFor(String stationId) {
+        HttpWeatherSource httpWeatherSource = new HttpWeatherSource("http://apis.is/weather/observations/en?stations=");
+        FileWeatherSink fileWeatherSink = new FileWeatherSink();
+        Application application = new Application(httpWeatherSource, fileWeatherSink);
+        application.exportFor(stationId);
         System.out.println("DONE");
     }
 }
